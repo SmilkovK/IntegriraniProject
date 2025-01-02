@@ -1,0 +1,22 @@
+﻿@model DeliveryAppDomain.Domain.Restaurant
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4>Details of @Model.Name</h4>
+<hr />
+<p>Description: @Model.Description</p>
+<p>Rating: @Model.Raiting</p>
+
+<h4>Available Foods:</h4>
+<ul>
+    @foreach (var food in ViewData["Foods"] as List<DeliveryAppDomain.Domain.Food>)
+    {
+        <li>@food.Name - @food.Price</li>
+    }
+</ul>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

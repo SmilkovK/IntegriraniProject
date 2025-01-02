@@ -1,0 +1,21 @@
+﻿@model DeliveryAppDomain.Identity.ManageRoles
+
+<form asp-action="AddUserToRole" method="post">
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="SelectedRole"></label>
+        <select asp-for="SelectedRole" asp-items="@(new SelectList(Model.Roles))" class="form-control"></select>
+        <span asp-validation-for="SelectedRole" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add User to Role</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,42 @@
+﻿@model DeliveryAppDomain.Domain.AddFoodViewModel
+
+@{
+    ViewData["Title"] = "Add Food to Restaurant";
+}
+
+<h4>Add Food to Restaurant</h4>
+<hr />
+
+<form method="post">
+    @Html.AntiForgeryToken()
+
+    <!-- Dropdown for selecting restaurant -->
+    <div class="form-group">
+        <label for="SelectedRestaurantId">Select Restaurant</label>
+        <select asp-for="SelectedRestaurantId" class="form-control">
+            <option value="">-- Select a Restaurant --</option>
+            @foreach (var restaurant in Model.Restaurants)
+            {
+                <option value="@restaurant.Id">@restaurant.Name</option>
+            }
+        </select>
+        <span asp-validation-for="SelectedRestaurantId" class="text-danger"></span>
+    </div>
+
+    <!-- Select foods available to add -->
+    <div class="form-group">
+        <label for="SelectedFoodIds">Select Foods</label>
+        <select asp-for="SelectedFoodIds" asp-items="@(new SelectList(Model.Foods, "Id", "Name"))" class="form-control" multiple="multiple">
+            <option value="">-- Select Foods --</option>
+        </select>
+        <span asp-validation-for="SelectedFoodIds" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Add Selected Food</button>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to Restaurants List</a>
+</div>
